@@ -1,0 +1,26 @@
+
+<!doctype html>
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Bookshop</title>
+		<meta name="description" content="Google Book Search">
+		<meta name="author" content="Mark Tyers">
+	</head>
+	<body>
+		<h1>Bookshop</h1>
+		<form action="/" method="get">
+			<input type="text" name="q" value="${query}">
+			<input type="submit" value="Search">
+		</form>
+		<h2>{{locals.query}}</h2>
+		<h2>{{result}}</h2>
+		<ol>
+			{{#each books}}
+				<li><a href="/details/{{this.query}}/{{this.id}}">{{this.title}}</a></li>
+			{{/each}}
+		</ol>
+		
+	</body>
+</html>
