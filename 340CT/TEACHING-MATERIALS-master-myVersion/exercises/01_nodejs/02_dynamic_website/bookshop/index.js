@@ -70,7 +70,6 @@ app.get('/', async(req, res) => {
 
 app.get('/details/:query/:id', (req, res) => {
 	console.log(req.params.id)
-	req.params.id = 1
 	const sql = `SELECT * FROM books WHERE id = ${req.params.id};`
 	console.log(sql)
 	let q = req.params.query
