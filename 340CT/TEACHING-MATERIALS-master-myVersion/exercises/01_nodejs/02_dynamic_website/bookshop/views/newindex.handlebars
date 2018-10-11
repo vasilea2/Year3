@@ -11,16 +11,14 @@
 	<body>
 		<h1>Bookshop</h1>
 		<form action="/" method="get">
-			<input type="text" name="q" value="${query}">
+			<input type="text" name="q" value="{{query}}">
 			<input type="submit" value="Search">
 		</form>
-		<h2>{{locals.query}}</h2>
 		<h2>{{result}}</h2>
 		<ol>
 			{{#each books}}
-				<li><a href="/details/{{this.query}}/{{this.id}}">{{this.title}}</a></li>
+				<li><a href="http://my340ctcont-andreivasile1010726532.codeanyapp.com:8080/details/{{this.id}}/?q={{../query}}">{{this.title}}</a></li>
 			{{/each}}
 		</ol>
-		
 	</body>
 </html>
