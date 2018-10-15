@@ -12,7 +12,8 @@
     "tap": "^10.7.3"
   },
   "dependencies": {
-    "request": "^2.83.0",
+    "math": "0.0.3",
+    "request": "^2.88.0",
     "tap-mocha-reporter": "^3.0.6"
   }
 }

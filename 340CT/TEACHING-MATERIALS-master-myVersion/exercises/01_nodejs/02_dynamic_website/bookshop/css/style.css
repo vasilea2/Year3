@@ -1,0 +1,38 @@
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+title {
+    background: #781351
+}
+
+.submit input {
+    margin-left: 4.5em;
+}
+
+input, textarea {
+    color: #781351;
+    background: #fee3ad;
+    border: 1px solid #781351
+}
+
+label {
+    width: 8em;
+    float: left;
+    text-align: right;
+    margin-right: 0.5em;
+    display: block
+}
+
+a.return, #test, .submit input {
+    width: 8em;
+    color: #000;
+    background: #ffa20f;
+    border: 2px outset #d7b9c9
+}
+
+#test, a.return {
+    margin-left: 3.7em;
+    padding: 0 2em 0 2em;
+}

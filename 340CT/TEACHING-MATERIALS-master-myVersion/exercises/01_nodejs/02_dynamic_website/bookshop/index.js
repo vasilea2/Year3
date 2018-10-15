@@ -33,24 +33,23 @@ app.get('/oldindex', async(req, res) => {
 	})
 })
 
-app.get('/', async(req, res) => {
+app.get('/', (req, res) => {
 	let sql = 'SELECT id, title, description FROM books;'
 	// --------
 	let q = ''
-	let resultString = 'This is the full list of books'
+	let resultString = ''
+	let booksData = ''
 	if(req.query !== undefined && req.query.q !== undefined) {
 		sql = `SELECT id, title FROM books 
 			WHERE upper(title) LIKE upper("%${req.query.q}%") 
 			OR upper(description) LIKE upper("%${req.query.q}%")
 			OR upper(author) LIKE upper("%${req.query.q}%")
 			OR upper(publisher) LIKE upper("%${req.query.q}%")`
-//       OR year = CAST("${req.query.q}" AS INTEGER);`
-// 		q = ${req.query.q}
+		q = req.query.q
 	}
   
   let queryInt = parseInt(req.query.q, 10) 
   if (isNaN(queryInt)) {
-    console.log("Not an int");
     sql += ";"
   } else {
     sql += ` OR publication_year = ${queryInt};` 
@@ -64,11 +63,12 @@ app.get('/', async(req, res) => {
 			list += `<li>${book.id}:${book.title}</br>${book.description}</br></li>`
 		}
 		if (req.query.q !== undefined) {
-      resultString = data.length + " results for searching '" + req.query.q + "'"
+			  resultString = data.length + " results for searching '" + req.query.q + "'"
+			  booksData = data
 		}
 		list += '</ol>'
 		// --------
-		res.render('newindex', {books: data, result: resultString, query: q})
+		res.render('newindex', {books: booksData, result: resultString, query: q})
 		// --------
 	})
 })
@@ -78,7 +78,6 @@ app.get('/details/:id', (req, res) => {
 	const sql = `SELECT * FROM books WHERE id = ${req.params.id};`
 	console.log(sql)
 	const q = req.query.q
-  console.log(q)
 	db.get(sql, (err, data) => {
 		if(err) console.error(err.message)
 		data.description = data.description.replace(/\n/g, "</p><p>")
@@ -86,9 +85,9 @@ app.get('/details/:id', (req, res) => {
 	})
 })
 
-app.get('/form', async(req, res) => res.render('form'))
+app.get('/form', (req, res) => res.render('form'))
 
-app.post('/add', async(req, res) => {
+app.post('/add', (req, res) => {
 	console.log(req.body)
 	const sql = `INSERT INTO books(title, isbn, description, author, publisher, publication_year)
 				VALUES("${req.body.title}", ${req.body.isbn}, "${req.body.description}", "${req.body.author}", "${req.body.publisher}", ${req.body.year});`
